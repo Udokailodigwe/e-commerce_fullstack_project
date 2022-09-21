@@ -1,35 +1,37 @@
 import mongoose, { Document } from 'mongoose'
 
-export type MovieDocument = Document & {
+export type ProductDocument = Document & {
   name: string
-  publishedYear: number
-  genres: string[]
-  duration: number
-  rating: number
-  characters: string[]
+  description: string
+  category: string[]
+  variants: string
+  sizes: string
 }
 
-const movieSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: {
     type: String,
     index: true,
-  },
-  publishedYear: {
-    type: Number,
     required: true,
-    min: 1900,
   },
-  genres: [String],
-  duration: {
-    type: Number,
+  description: {
+    type: String,
     required: true,
-    min: 1,
   },
-  rating: {
-    type: Number,
-    min: 0,
+  category: {
+    type: [String],
+    index: true,
+    required: true,
   },
-  characters: [String],
+  variants: {
+    type: [String],
+    index: true,
+    required: true,
+  },
+  sizes: {
+    type: [String],
+    required: true,
+  },
 })
 
-export default mongoose.model<MovieDocument>('Movie', movieSchema)
+export default mongoose.model<ProductDocument>('Product', productSchema)
