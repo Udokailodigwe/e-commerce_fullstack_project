@@ -4,7 +4,7 @@ import Product from '../models/Product.model'
 import productService from '../services/Product.service'
 import { BadRequestError } from '../helpers/apiError'
 
-// GET /movies
+// GET /product
 export const findAll = async (
   req: Request,
   res: Response,
@@ -21,7 +21,7 @@ export const findAll = async (
   }
 }
 
-// POST /movies
+// POST /product
 export const createProduct = async (
   req: Request,
   res: Response,
@@ -50,57 +50,63 @@ export const createProduct = async (
   }
 }
 
-// // PUT /movies/:movieId
-// export const updateMovie = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const update = req.body
-//     const movieId = req.params.movieId
-//     const updatedMovie = await movieService.update(movieId, update)
-//     res.json(updatedMovie)
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// PUT /products/:productId
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const update = req.body
+    const productId = req.params.productId
+    console.log(update, productId)
 
-// // DELETE /movies/:movieId
-// export const deleteMovie = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     await movieService.deleteMovie(req.params.movieId)
-//     res.status(204).end()
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+    const updatedProduct = await productService.update(productId, update)
+    res.send({ message: 'Updated successfully' })
+    res.json(updatedProduct)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
-// // GET /movies/:movieId
-// export const findById = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     res.json(await movieService.findById(req.params.movieId))
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// GET /product/:productId
+export const findById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params.productId
+    res.json(await productService.findById(productId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+// Delete /product/:productId
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { productId } = req.params
+    await productService.deleteProduct(productId)
+    res.send({ message: 'Deleted successfully' })
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'validationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
