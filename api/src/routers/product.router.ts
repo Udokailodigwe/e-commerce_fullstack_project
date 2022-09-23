@@ -3,18 +3,18 @@ import express from 'express'
 import {
   findAll,
   createProduct,
-  // findById,
-  // deleteMovie,
-  // updateMovie,
+  updateProduct,
+  findById,
+  deleteProduct,
 } from '../controllers/Product.controller'
 
 const router = express.Router()
 
-// Every path we define here will get /api/v1/movies prefix
+// Every path we define here will get /api/v1/products prefix
 router.get('/', findAll)
 router.post('/', createProduct)
-// router.get('/:movieId', findById)
-// router.put('/:movieId', updateMovie)
-// router.delete('/:movieId', deleteMovie)
+router.put('/:productId', updateProduct)
+router.get('/:productId', findById)
+router.delete('/:productId', deleteProduct)
 
 export default router
