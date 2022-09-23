@@ -6,48 +6,51 @@ const findAll = async (): Promise<ProductDocument[]> => {
 }
 
 const create = async (product: ProductDocument): Promise<ProductDocument> => {
-  return product.save()
+  const savedProduct = product.save()
+  return savedProduct
 }
 
-// const findById = async (movieId: string): Promise<MovieDocument> => {
-//   const foundMovie = await Movie.findById(movieId)
+const update = async (
+  productId: string,
+  update: Partial<ProductDocument>
+): Promise<ProductDocument | null> => {
+  const foundProduct = await Product.findByIdAndUpdate(productId, update, {
+    new: true,
+  })
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
-// const update = async (
-//   movieId: string,
-//   update: Partial<MovieDocument>
-// ): Promise<MovieDocument | null> => {
-//   const foundMovie = await Movie.findByIdAndUpdate(movieId, update, {
-//     new: true,
-//   })
+const findById = async (productId: string): Promise<ProductDocument> => {
+  const foundProduct = await Product.findById(productId)
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
-// const deleteMovie = async (movieId: string): Promise<MovieDocument | null> => {
-//   const foundMovie = Movie.findByIdAndDelete(movieId)
+const deleteProduct = async (
+  productId: string
+): Promise<ProductDocument | null> => {
+  const foundProduct = Product.findByIdAndDelete(productId)
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
 export default {
   findAll,
   create,
-  // findById,
-  // update,
-  // deleteMovie,
+  update,
+  findById,
+  deleteProduct,
 }
