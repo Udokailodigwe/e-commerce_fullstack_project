@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
 
-  isBlocked: {
+  isBanned: {
     default: false,
   },
 })
