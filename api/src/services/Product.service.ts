@@ -21,7 +21,6 @@ const update = async (
   if (!foundProduct) {
     throw new NotFoundError(`Product ${productId} not found`)
   }
-
   return foundProduct
 }
 

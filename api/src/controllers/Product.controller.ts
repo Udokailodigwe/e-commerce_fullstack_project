@@ -59,10 +59,9 @@ export const updateProduct = async (
   try {
     const update = req.body
     const productId = req.params.productId
-    console.log(update, productId)
 
     const updatedProduct = await productService.update(productId, update)
-    res.send({ message: 'Updated successfully' })
+    res.send({ message: 'Product updated successfully', updatedProduct })
     res.json(updatedProduct)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -73,7 +72,7 @@ export const updateProduct = async (
   }
 }
 
-// GET /product/:productId
+// GET /products/:productId
 export const findById = async (
   req: Request,
   res: Response,
@@ -91,7 +90,7 @@ export const findById = async (
   }
 }
 
-// Delete /product/:productId
+// Delete /products/:productId
 export const deleteProduct = async (
   req: Request,
   res: Response,
