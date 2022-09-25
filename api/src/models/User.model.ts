@@ -18,11 +18,13 @@ const userSchema = new mongoose.Schema({
 
   firstName: {
     type: String,
+    minlength: 2,
     required: true,
   },
 
   lastName: {
     type: String,
+    minlength: 2,
     required: true,
   },
 
@@ -36,6 +38,7 @@ const userSchema = new mongoose.Schema({
 
   password: {
     type: String,
+    minlength: 2,
     required: true,
   },
 
