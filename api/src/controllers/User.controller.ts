@@ -61,12 +61,17 @@ export const updateUser = async (
     const userId = req.params.userId
 
     const updatedUser = await userService.update(userId, update)
-    res.send({ message: 'User updated successfully', updatedUser })
     res.json(updatedUser)
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof Error && error.name == 'validationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
 }
 
-//Get /users/:User
+//Get /users/:user
 export const findById = async (
   req: Request,
   res: Response,
@@ -93,7 +98,6 @@ export const deleteUser = async (
   try {
     const userId = req.params.userId
     await userService.deleteUser(userId)
-    res.send({ message: 'Deleted successfully' })
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'validationError') {

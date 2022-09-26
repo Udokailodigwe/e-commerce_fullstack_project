@@ -1,12 +1,13 @@
 import mongoose, { Document } from 'mongoose'
 
 export type UserDocument = Document & {
+  product: mongoose.Schema.Types.ObjectId[]
+  admin: boolean
   firstName: string
   lastName: string
   email: string
   password: string
   image: string
-  product: mongoose.Schema.Types.ObjectId[]
   isBanned: boolean
 }
 
@@ -14,6 +15,11 @@ const userSchema = new mongoose.Schema({
   product: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'Product',
+  },
+
+  admin: {
+    type: Boolean,
+    default: false,
   },
 
   firstName: {
@@ -47,6 +53,7 @@ const userSchema = new mongoose.Schema({
   },
 
   isBanned: {
+    type: Boolean,
     default: false,
   },
 })
