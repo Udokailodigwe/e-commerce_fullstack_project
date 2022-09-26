@@ -61,7 +61,6 @@ export const updateProduct = async (
     const productId = req.params.productId
 
     const updatedProduct = await productService.update(productId, update)
-    res.send({ message: 'Product updated successfully', updatedProduct })
     res.json(updatedProduct)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -99,7 +98,6 @@ export const deleteProduct = async (
   try {
     const { productId } = req.params
     await productService.deleteProduct(productId)
-    res.send({ message: 'Deleted successfully' })
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'validationError') {
