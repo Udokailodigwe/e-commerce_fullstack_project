@@ -1,13 +1,30 @@
 import axios from "axios";
 import { Product } from "types";
 
-const fetchProduct = async () => {
-  const URL = "http://localhost:4000/api/v1/products";
-  const response = await axios.get(URL);
-  const resData: Product[] = await response.data;
+const URL = "http://localhost:4000/api/v1/products";
+
+const fetchAllProduct = async () => {
+  const data = await axios.get(URL);
+  const response: Product[] = data.data;
   return {
-    response: resData,
+    response,
   };
 };
 
-export default fetchProduct;
+const fetchOneProduct = async (id: string) => {
+  const data = await axios.get(`${URL}/${id}`);
+  const response: Product[] = data.data;
+  return {
+    response,
+  };
+};
+
+// const createProduct = async (id: string) => {
+//   const data = await axios.get(`${URL}/${id}`);
+//   const response: Product[] = data.data;
+//   return {
+//     response,
+//   };
+// };
+
+export { fetchAllProduct, fetchOneProduct };

@@ -1,14 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import fetchProductAPI from "API/product";
-import { ProductState } from "types";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const fetchProductThunk = createAsyncThunk(
-  "product/fetchAll",
-  async () => {
-    const { response } = await fetchProductAPI();
-    return response;
-  }
-);
+import { fetchAllProductThunk } from "redux/services/product";
+
+import { ProductState } from "types";
 
 const initialState: ProductState = {
   productData: [],
@@ -23,7 +17,16 @@ export const productSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(fetchProductThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchAllProductThunk.rejected, (state) => {
+      state.isLoading = false;
+      state.error = false;
+    });
+
+    builder.addCase(fetchAllProductThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(fetchAllProductThunk.fulfilled, (state, action) => {
       console.log(action.payload);
       const response = action.payload;
       state.productData = response;
