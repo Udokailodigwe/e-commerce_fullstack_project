@@ -57,10 +57,16 @@ export const updateUser = async (
   next: NextFunction
 ) => {
   try {
-    const update = req.body
+    const { firstName, lastName, email, password, image } = req.body
     const userId = req.params.userId
 
-    const updatedUser = await userService.update(userId, update)
+    const updatedUser = await userService.update(userId, {
+      firstName,
+      lastName,
+      email,
+      password,
+      image,
+    })
     res.json(updatedUser)
   } catch (error) {
     if (error instanceof Error && error.name == 'validationError') {

@@ -9,25 +9,15 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "*": [
-        "node_modules/*",
-      ]
+      "*": ["node_modules/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*"],
   "ts-node": {
     "files": true
   },
-  "files": [
-    "global.d.ts"
-  ],
-  "exclude": [
-    "*.test.ts",
-    "*.fixture.ts",
-    "db-helper.ts"
-  ]
+  "files": ["global.d.ts"],
+  "exclude": ["*.test.ts", "*.fixture.ts", "db-helper.ts"]
 }
