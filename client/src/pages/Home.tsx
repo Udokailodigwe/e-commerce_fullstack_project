@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state: RootState) => state);
+  const products = useAppSelector(
+    (state: RootState) => state.products.products
+  );
+
+  console.log(products);
 
   useEffect(() => {
     dispatch(fetchAllProductThunk());
@@ -15,7 +19,8 @@ const Home = () => {
 
   return (
     <div>
-      {products.productData.map((product) => (
+      <Link to={"/user/"}>go to admin</Link>
+      {products.map((product) => (
         <ul key={product._id}>
           <li>
             <Link to={`/products/${product._id}`}>{product.name}</Link>
