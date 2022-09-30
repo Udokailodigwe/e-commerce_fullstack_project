@@ -21,12 +21,9 @@ export type ProductDocument = Document & {
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    index: true,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   category: {
     type: {
@@ -36,12 +33,10 @@ const productSchema = new mongoose.Schema({
       men: [String],
     },
     index: true,
-    required: true,
   },
   variants: {
     type: [String],
     index: true,
-    required: true,
   },
   sizes: {
     type: {
@@ -51,7 +46,6 @@ const productSchema = new mongoose.Schema({
       large: Number,
       xlarge: Number,
     },
-    required: true,
   },
   image: {
     type: String,

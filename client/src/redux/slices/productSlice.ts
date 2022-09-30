@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchAllProductThunk } from "redux/services/product";
+import {
+  fetchAllProductThunk,
+  createProductThunk,
+} from "redux/services/product";
 
 import { ProductState } from "types";
 
 const initialState: ProductState = {
-  productData: [],
+  products: [],
   isLoading: true,
   error: false,
 };
@@ -27,12 +30,30 @@ export const productSlice = createSlice({
     });
 
     builder.addCase(fetchAllProductThunk.fulfilled, (state, action) => {
-      console.log(action.payload);
-      const response = action.payload;
-      state.productData = response;
+      console.log("fetchAll Payload", action.payload);
+      const { response } = action.payload;
+      state.products = response;
       state.isLoading = false;
       state.error = false;
     });
+
+    builder.addCase(createProductThunk.rejected, (state) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    builder.addCase(createProductThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(
+      createProductThunk.fulfilled,
+      (state: ProductState, action) => {
+        console.log("create payload", action.payload);
+        state.products = [...state.products, action.payload.response];
+        state.isLoading = false;
+      }
+    );
   },
 });
 

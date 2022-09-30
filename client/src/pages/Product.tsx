@@ -11,7 +11,7 @@ export default function Product() {
   const { productId } = useParams() as { productId: string };
 
   const products = useAppSelector(
-    (state: RootState) => state.products.productData
+    (state: RootState) => state.products.products
   );
 
   const product = products.find((product) => product._id === productId);
@@ -20,7 +20,7 @@ export default function Product() {
     // if (products.length === 0) {
     dispatch(fetchAllProductThunk());
     // }
-  }, [dispatch, products.length]);
+  }, [dispatch]);
 
   if (!product) return <h1>Loading product</h1>;
 

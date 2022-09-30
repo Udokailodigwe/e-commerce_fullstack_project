@@ -1,17 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllProduct, fetchOneProduct } from "../../API/product";
+import {
+  createProduct,
+  fetchAllProduct,
+  fetchOneProduct,
+} from "../../API/product";
+import { Product } from "types";
 
 const fetchAllProductThunk = createAsyncThunk("products/fetchAll", async () => {
-  const { response } = await fetchAllProduct();
-  return response;
+  try {
+    const { response } = await fetchAllProduct();
+    return {
+      response,
+    };
+  } catch (error) {
+    throw error;
+  }
 });
 
 const fetchOneProductThunk = createAsyncThunk(
   "product/fetchAll",
-  async (id: string) => {
-    const { response } = await fetchOneProduct(id);
+  async (productId: string) => {
+    const { response } = await fetchOneProduct(productId);
     return response;
   }
 );
 
-export { fetchAllProductThunk, fetchOneProductThunk };
+const createProductThunk = createAsyncThunk(
+  "product/create",
+  async (product: Product) => {
+    const { response } = await createProduct(product);
+    return {
+      response,
+    };
+  }
+);
+
+export { fetchAllProductThunk, fetchOneProductThunk, createProductThunk };
