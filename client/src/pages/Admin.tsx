@@ -1,11 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
 import { useAppDispatch } from "redux/hooks";
 import { createProductThunk } from "redux/services/product";
 import { NewProduct, Product } from "types";
-
-import debounce from "lodash.debounce";
 
 export default function Admin() {
   const [newProduct, setNewProduct] = useState<NewProduct>({
@@ -14,7 +11,7 @@ export default function Admin() {
     kids: [],
     women: [],
     men: [],
-    variants: [],
+    variants: [""],
     small: 0,
     medium: 0,
     large: 0,
@@ -24,84 +21,54 @@ export default function Admin() {
 
   const dispatch = useAppDispatch();
 
-  const debouncedSetName = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, name: e.target.value });
-      console.log(newProduct.name);
-    }, 400),
-    []
-  );
+  const handleSetName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, name: e.target.value });
+  };
 
-  const debouncedSetDescription = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, description: e.target.value });
-    }, 400),
-    []
-  );
+  const handleSetDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, description: e.target.value });
+  };
 
-  const debouncedSetKids = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      const newKids = [...newProduct.kids, e.target.value];
-      setNewProduct({ ...newProduct, kids: newKids });
-    }, 400),
-    []
-  );
+  const handleSetKids = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newKids = [...newProduct.kids, e.target.value];
+    setNewProduct({ ...newProduct, kids: newKids });
+  };
 
-  const debouncedSetWomen = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      const newWomen = [...newProduct.women, e.target.value];
-      setNewProduct({ ...newProduct, women: newWomen });
-    }, 400),
-    []
-  );
+  const handleSetWomen = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newWomen = [...newProduct.women, e.target.value];
+    setNewProduct({ ...newProduct, women: newWomen });
+  };
 
-  const debouncedSetMen = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      const newMen = [...newProduct.men, e.target.value];
-      setNewProduct({ ...newProduct, men: newMen });
-    }, 400),
-    []
-  );
+  const handleSetMen = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newMen = [...newProduct.men, e.target.value];
+    setNewProduct({ ...newProduct, men: newMen });
+  };
 
-  const debouncedSetVariants = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      const newVariants = [...newProduct.variants, e.target.value];
-      setNewProduct({ ...newProduct, variants: newVariants });
-    }, 400),
-    []
-  );
+  const handleSetVariants = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVariants = [e.target.value];
+    setNewProduct({ ...newProduct, variants: newVariants });
+  };
 
-  const debouncedSetImage = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, image: e.target.value });
-    }, 400),
-    []
-  );
+  const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, image: e.target.value });
+  };
 
-  const debouncedSetSmall = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, small: parseFloat(e.target.value) });
-    }, 400),
-    []
-  );
-  const debouncedSetMedium = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, medium: parseFloat(e.target.value) });
-    }, 400),
-    []
-  );
-  const debouncedSetLarge = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, large: parseFloat(e.target.value) });
-    }, 400),
-    []
-  );
-  const debouncedSetXlarge = useCallback(
-    debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNewProduct({ ...newProduct, xlarge: parseFloat(e.target.value) });
-    }, 400),
-    []
-  );
+  const handleSetSmall = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, small: parseFloat(e.target.value) });
+  };
+
+  const handleSetMedium = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, medium: parseFloat(e.target.value) });
+  };
+
+  const handleSetLarge = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, large: parseFloat(e.target.value) });
+  };
+
+  const handleSetXlarge = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const newXlarge = [...newProduct.xlarge, parseFloat(e.target.value)];
+    setNewProduct({ ...newProduct, xlarge: parseFloat(e.target.value) });
+  };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -131,38 +98,58 @@ export default function Admin() {
       <h1>Admin Edit Product</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">name</label>
-        <input type="text" id="name" required onChange={debouncedSetName} />
+        <input type="text" id="name" required onChange={handleSetName} />
         <br />
         <label htmlFor="description">description</label>
         <input
           type="text"
           id="description"
           required
-          onChange={debouncedSetDescription}
+          onChange={handleSetDescription}
         />
         <label htmlFor="kids">kids wear</label>
-        <input type="text" id="kids" onChange={debouncedSetKids} />
+        <input type="text" id="kids" onChange={handleSetKids} />
         <br />
         <label htmlFor="women">women wear</label>
-        <input type="text" id="women" onChange={debouncedSetWomen} />
+        <input type="text" id="women" onChange={handleSetWomen} />
         <br />
         <label htmlFor="men">men wear</label>
-        <input type="text" id="men" onChange={debouncedSetMen} />
+        <input type="text" id="men" onChange={handleSetMen} />
         <br />
         <label htmlFor="variants">Variants</label>
-        <input type="text" id="variants" onChange={debouncedSetVariants} />
+        <input type="text" id="variants" onChange={handleSetVariants} />
         <br />
         <label htmlFor="small">small</label>
-        <input type="radio" id="small" onChange={debouncedSetSmall} />
+        <input
+          type="number"
+          id="small"
+          value={newProduct.small}
+          onChange={handleSetSmall}
+        />
         <label htmlFor="medium">medium</label>
-        <input type="radio" id="medium" onChange={debouncedSetMedium} />
+        <input
+          type="number"
+          id="medium"
+          value={newProduct.medium}
+          onChange={handleSetMedium}
+        />
         <label htmlFor="large">large</label>
-        <input type="radio" id="large" onChange={debouncedSetLarge} />
+        <input
+          type="number"
+          id="large"
+          value={newProduct.large}
+          onChange={handleSetLarge}
+        />
         <label htmlFor="xlarge">xlarge</label>
-        <input type="radio" id="xlarge" onChange={debouncedSetXlarge} />
+        <input
+          type="number"
+          id="xlarge"
+          value={newProduct.xlarge}
+          onChange={handleSetXlarge}
+        />
         <br />
         <label htmlFor="image">image</label>
-        <input type="text" id="image" onChange={debouncedSetImage} />
+        <input type="text" id="image" onChange={handleSetImage} />
         <br />
         <button>Create new product</button>
       </form>
