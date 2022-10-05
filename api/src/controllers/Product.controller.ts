@@ -28,14 +28,29 @@ export const createProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { name, description, category, variants, sizes, image } = req.body
+    const {
+      name,
+      description,
+      kidswear,
+      womenwear,
+      menwear,
+      variants,
+      small,
+      medium,
+      large,
+      image,
+    } = req.body
 
     const product = new Product({
       name,
       description,
-      category,
+      kidswear,
+      womenwear,
+      menwear,
       variants,
-      sizes,
+      small,
+      medium,
+      large,
       image,
     })
 

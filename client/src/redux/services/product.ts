@@ -3,8 +3,10 @@ import {
   createProduct,
   fetchAllProduct,
   fetchOneProduct,
+  updateProduct,
+  deleteProduct,
 } from "../../API/product";
-import { Product } from "types";
+import { Product, Update } from "types";
 
 const fetchAllProductThunk = createAsyncThunk("products/fetchAll", async () => {
   try {
@@ -21,7 +23,9 @@ const fetchOneProductThunk = createAsyncThunk(
   "product/fetchAll",
   async (productId: string) => {
     const { response } = await fetchOneProduct(productId);
-    return response;
+    return {
+      response,
+    };
   }
 );
 
@@ -35,4 +39,26 @@ const createProductThunk = createAsyncThunk(
   }
 );
 
-export { fetchAllProductThunk, fetchOneProductThunk, createProductThunk };
+const updateProductThunk = createAsyncThunk(
+  "product/update",
+  async ({ productId, update }: Update) => {
+    const { response } = await updateProduct(productId, update);
+    return { response };
+  }
+);
+
+const deleteProductThunk = createAsyncThunk(
+  "product/delete",
+  async (productId: string | undefined) => {
+    await deleteProduct(productId);
+    return { productId };
+  }
+);
+
+export {
+  fetchAllProductThunk,
+  fetchOneProductThunk,
+  createProductThunk,
+  updateProductThunk,
+  deleteProductThunk,
+};

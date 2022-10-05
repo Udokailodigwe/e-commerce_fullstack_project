@@ -3,18 +3,13 @@ import mongoose, { Document } from 'mongoose'
 export type ProductDocument = Document & {
   name: string
   description: string
-  category: {
-    kids: string[]
-    women: string[]
-    men: string[]
-  }
+  kidswear: string
+  womenwear: string
+  menwear: string
   variants: string[]
-  sizes: {
-    small: number
-    medium: number
-    large: number
-    xlarge: number
-  }
+  small: number
+  medium: number
+  large: number
   image: string
 }
 
@@ -25,27 +20,28 @@ const productSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  category: {
-    type: {
-      _id: { id: false },
-      kids: [String],
-      women: [String],
-      men: [String],
-    },
-    index: true,
+  kidswear: {
+    type: String,
+  },
+  womenwear: {
+    type: String,
+  },
+  menwear: {
+    type: String,
   },
   variants: {
     type: [String],
   },
-  sizes: {
-    type: {
-      _id: { id: false },
-      small: Number,
-      medium: Number,
-      large: Number,
-      xlarge: Number,
-    },
+  small: {
+    type: Number,
   },
+  medium: {
+    type: Number,
+  },
+  large: {
+    type: Number,
+  },
+
   image: {
     type: String,
   },
