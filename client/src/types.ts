@@ -2,18 +2,13 @@ export type Product = {
   _id?: string;
   name: string;
   description: string;
-  category: {
-    kids: string[];
-    women: string[];
-    men: string[];
-  };
+  kidswear: string;
+  womenwear: string;
+  menwear: string;
   variants: string[];
-  sizes: {
-    small: number;
-    medium: number;
-    large: number;
-    xlarge: number;
-  };
+  small: number;
+  medium: number;
+  large: number;
   image: string;
 };
 
@@ -23,17 +18,8 @@ export type ProductState = {
   error: boolean;
 };
 
-export type NewProduct = {
-  _id?: string;
-  name: string;
-  description: string;
-  kids: string[];
-  women: string[];
-  men: string[];
-  variants: string[];
-  small: number;
-  medium: number;
-  large: number;
-  xlarge: number;
-  image: string;
+//i could apply typscript pick method
+export type Update = {
+  productId: string;
+  update: Product;
 };

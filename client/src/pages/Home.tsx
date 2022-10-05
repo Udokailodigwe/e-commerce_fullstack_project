@@ -19,14 +19,15 @@ const Home = () => {
 
   return (
     <div>
-      <Link to={"/user/"}>go to admin</Link>
-      {products.map((product) => (
-        <ul key={product._id}>
-          <li>
-            <Link to={`/products/${product._id}`}>{product.name}</Link>
-          </li>
-        </ul>
-      ))}
+      <div>
+        {products.map((product) => (
+          <ul key={product._id}>
+            <li>
+              <Link to={`/products/${product._id}`}>{product.name}</Link>
+            </li>
+          </ul>
+        ))}
+      </div>
     </div>
   );
 };
