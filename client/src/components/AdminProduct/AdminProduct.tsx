@@ -3,12 +3,12 @@ import { useAppDispatch } from "redux/hooks";
 import { deleteProductThunk } from "redux/services/product";
 import { Product } from "types";
 
-type Products = {
+type ProductProps = {
   product: Product;
   setCurrentId: any;
 };
 
-export default function AdminProduct({ product, setCurrentId }: Products) {
+export default function AdminProduct({ product, setCurrentId }: ProductProps) {
   const dispatch = useAppDispatch();
 
   const handleSetId = () => {

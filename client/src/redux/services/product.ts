@@ -8,19 +8,22 @@ import {
 } from "../../API/product";
 import { Product, Update } from "types";
 
-const fetchAllProductThunk = createAsyncThunk("products/fetchAll", async () => {
-  try {
-    const { response } = await fetchAllProduct();
-    return {
-      response,
-    };
-  } catch (error) {
-    throw error;
+const fetchAllProductThunk = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    try {
+      const { response } = await fetchAllProduct();
+      return {
+        response,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
-});
+);
 
 const fetchOneProductThunk = createAsyncThunk(
-  "product/fetchAll",
+  "product/fetchProduct",
   async (productId: string) => {
     const { response } = await fetchOneProduct(productId);
     return {

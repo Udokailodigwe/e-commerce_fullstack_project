@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { createProductThunk, updateProductThunk } from "redux/services/product";
+import { CurrentId } from "types";
 
-type CurrentId = {
-  currentId: string;
-  setCurrentId: (id: string) => void;
-};
 export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
   const [newProduct, setNewProduct] = useState({
     name: "",

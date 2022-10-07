@@ -12,13 +12,9 @@ const create = async (user: UserDocument): Promise<UserDocument> => {
 
 const update = async (
   userId: string,
-  { firstName, lastName, email, password, image }: Partial<UserDocument>
+  update: Partial<UserDocument>
 ): Promise<UserDocument | null> => {
-  const foundUser = await User.findByIdAndUpdate(
-    userId,
-    { firstName, lastName, email, password, image },
-    { new: true }
-  )
+  const foundUser = await User.findByIdAndUpdate(userId, update, { new: true })
 
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
@@ -37,7 +33,6 @@ const findById = async (userId: string): Promise<UserDocument> => {
 
 const deleteUser = async (userId: string): Promise<UserDocument> => {
   const foundUser = await User.findByIdAndDelete(userId)
-
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
   }
