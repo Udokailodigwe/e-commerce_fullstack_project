@@ -30,7 +30,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
       dispatch(createUserThunk(newUser));
     }
     clear();
-    window.location.reload();
   };
 
   const clear = () => {

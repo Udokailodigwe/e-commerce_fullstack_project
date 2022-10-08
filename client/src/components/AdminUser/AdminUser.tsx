@@ -18,8 +18,6 @@ export default function AdminUser({ user, setCurrentId }: UserProps) {
   };
   const handleDeleteUser = () => {
     dispatch(deleteUserThunk(user._id));
-    window.location.reload();
-    console.log(user._id);
   };
 
   return (

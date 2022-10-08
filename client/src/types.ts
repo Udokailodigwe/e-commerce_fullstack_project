@@ -20,11 +20,11 @@ export interface ProductState {
 
 export type Update = {
   productId: string;
-  update: Product;
+  update: Partial<Product>;
 };
 
 export type Users = {
-  _id?: string;
+  _id: string;
   admin: boolean;
   firstName: string;
   lastName: string;

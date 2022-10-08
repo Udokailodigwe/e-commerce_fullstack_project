@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Product } from "types";
+import { Product, Update } from "types";
 
 const URL = "http://localhost:4000/api/v1/products";
 
@@ -45,12 +45,13 @@ const createProduct = async (product: Product) => {
   }
 };
 
-const updateProduct = async (productId: string, update: Product) => {
+const updateProduct = async (productId: string, update: Partial<Product>) => {
   try {
+    // const { productId, update } = data;
     const data = await axios.put(`${URL}/${productId}`, update);
-    const response: Product = data.data;
-    const { status } = data;
-    return { response, status };
+    const response = data.data;
+    // const { status } = data;
+    return response;
   } catch (error) {
     throw error;
   }
@@ -59,9 +60,8 @@ const updateProduct = async (productId: string, update: Product) => {
 const deleteProduct = async (productId: string | undefined) => {
   try {
     const data = await axios.delete(`${URL}/${productId}`);
-    const response: Product = data.data;
     const { status } = data;
-    return { response, status };
+    return { productId, status };
   } catch (error) {
     throw error;
   }

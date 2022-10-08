@@ -20,6 +20,9 @@ export default function AdminProduct({ product, setCurrentId }: ProductProps) {
 
   return (
     <span>
+      <span>
+        {product.name}, {product.description}
+      </span>
       <button onClick={handleSetId}>Edit</button>
       <button onClick={handleDeleteProduct}>delete</button>
     </span>

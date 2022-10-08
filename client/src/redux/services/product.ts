@@ -45,8 +45,8 @@ const createProductThunk = createAsyncThunk(
 const updateProductThunk = createAsyncThunk(
   "product/update",
   async ({ productId, update }: Update) => {
-    const { response } = await updateProduct(productId, update);
-    return { response };
+    const response = await updateProduct(productId, update);
+    return response;
   }
 );
 

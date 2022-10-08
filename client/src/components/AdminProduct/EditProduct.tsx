@@ -5,6 +5,7 @@ import { createProductThunk, updateProductThunk } from "redux/services/product";
 import { CurrentId } from "types";
 
 export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
+  console.log(currentId);
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
@@ -38,7 +39,6 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
       dispatch(createProductThunk(newProduct));
     }
     clear();
-    window.location.reload();
   };
 
   const clear = () => {

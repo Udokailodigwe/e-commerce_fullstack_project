@@ -36,13 +36,11 @@ const createUser = async (user: PickedPropsEditUser) => {
   }
 };
 
-const deleteUser = async (id: string | undefined) => {
+const deleteUser = async (id: string) => {
   try {
-    const data = await axios.delete(`${URL}/${id}`);
-    const response = data.data;
-    const { status } = data;
+    const response = await axios.delete(`${URL}/${id}`);
+    const { status } = response.data;
     return {
-      response,
       status,
     };
   } catch (error) {

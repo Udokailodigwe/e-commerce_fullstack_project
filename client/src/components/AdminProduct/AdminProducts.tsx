@@ -9,7 +9,6 @@ import EditProduct from "./EditProduct";
 
 const AdminProducts = () => {
   const [currentId, setCurrentId] = useState("");
-  console.log(currentId);
   const dispatch = useAppDispatch();
   const products: Product[] = useAppSelector(
     (state: RootState) => state.products.products

@@ -4,6 +4,7 @@ import {
   deleteUserThunk,
   fetchUsersThunk,
   fetchUserThunk,
+  updateUserThunk,
 } from "redux/services/user";
 import { UsersState } from "types";
 
@@ -61,18 +62,35 @@ export const userSlice = createSlice({
       state.users = [...state.users, response];
     });
 
-    builder.addCase(deleteUserThunk.rejected, (state, action) => {
+    builder.addCase(updateUserThunk.rejected, (state, action) => {
       state.error = true;
       state.isLoading = false;
     });
 
-    builder.addCase(deleteUserThunk.pending, (state, action) => {
+    builder.addCase(updateUserThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(updateUserThunk.fulfilled, (state, action) => {
+      console.log(action.payload.response);
+      const { response } = action.payload;
+      state.users = [...state.users, response];
+      state.isLoading = false;
+    });
+
+    builder.addCase(deleteUserThunk.rejected, (state) => {
+      state.error = true;
+      state.isLoading = false;
+    });
+
+    builder.addCase(deleteUserThunk.pending, (state) => {
       state.isLoading = true;
     });
 
     builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
+      console.log(action.payload.id);
       const users = state.users.filter(
-        (user) => user._id !== action.payload.response
+        (user) => user._id !== action.payload.id
       );
       state.users = users;
       state.isLoading = false;

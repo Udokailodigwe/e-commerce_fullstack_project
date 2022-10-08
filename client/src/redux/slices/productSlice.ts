@@ -8,7 +8,7 @@ import {
   deleteProductThunk,
 } from "redux/services/product";
 
-import { ProductState } from "types";
+import { Product, ProductState, Update } from "types";
 
 const initialState: ProductState = {
   products: [],
@@ -71,9 +71,8 @@ export const productSlice = createSlice({
     });
 
     builder.addCase(updateProductThunk.fulfilled, (state, action) => {
-      const { response } = action.payload;
-      console.log("update", response);
-      state.products = [...state.products, response];
+      console.log("update", action.payload.response);
+      state.products = [action.payload.response];
       state.isLoading = false;
     });
 

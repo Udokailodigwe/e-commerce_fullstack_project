@@ -41,17 +41,14 @@ const createUserThunk = createAsyncThunk(
   }
 );
 
-const deleteUserThunk = createAsyncThunk(
-  "user/delete",
-  async (id: string | undefined) => {
-    try {
-      const { response, status } = await deleteUser(id);
-      return { response, status };
-    } catch (error) {
-      throw error;
-    }
+const deleteUserThunk = createAsyncThunk("user/delete", async (id: string) => {
+  try {
+    const { status } = await deleteUser(id);
+    return { id, status };
+  } catch (error) {
+    throw error;
   }
-);
+});
 
 const updateUserThunk = createAsyncThunk(
   "user/update",
