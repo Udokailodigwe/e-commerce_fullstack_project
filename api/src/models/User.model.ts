@@ -1,13 +1,13 @@
 import mongoose, { Document } from 'mongoose'
 
 export type UserDocument = Document & {
+  _id: mongoose.Schema.Types.ObjectId
   product: mongoose.Schema.Types.ObjectId[]
-  admin: boolean
   firstName: string
   lastName: string
   email: string
-  password: string
   image: string
+  isAdmin: boolean
   isBanned: boolean
 }
 
@@ -19,20 +19,13 @@ const userSchema = new mongoose.Schema({
     },
   ],
 
-  admin: {
-    type: Boolean,
-    default: false,
-  },
-
   firstName: {
     type: String,
-    minlength: 2,
     required: true,
   },
 
   lastName: {
     type: String,
-    minlength: 2,
     required: true,
   },
 
@@ -44,14 +37,13 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
 
-  password: {
-    type: String,
-    minlength: 2,
-    required: true,
-  },
-
   image: {
     type: String,
+  },
+
+  isAdmin: {
+    type: Boolean,
+    default: false,
   },
 
   isBanned: {

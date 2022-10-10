@@ -29,13 +29,12 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const { firstName, lastName, email, password, image } = req.body
+    const { firstName, lastName, email, image } = req.body
 
     const user = new User({
       firstName,
       lastName,
       email,
-      password,
       image,
     })
 
