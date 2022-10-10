@@ -57,9 +57,45 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
     });
   };
 
+  const handleSetName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, name: e.target.value });
+  };
+
+  const handleSetDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, description: e.target.value });
+  };
+
+  const handleSetKidsWear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, kidsWear: e.target.value });
+  };
+
+  const handleSetWomenWear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, womenWear: e.target.value });
+  };
+
+  const handleSetMenWear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, menWear: e.target.value });
+  };
+
   const handleSetVariants = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVariants = [e.target.value];
     setNewProduct({ ...newProduct, variants: newVariants });
+  };
+
+  const handleSetSmall = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, small: parseFloat(e.target.value) });
+  };
+
+  const handleSetMedium = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, medium: parseFloat(e.target.value) });
+  };
+
+  const handleSetLarge = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, large: parseFloat(e.target.value) });
+  };
+
+  const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, image: e.target.value });
   };
 
   return (
@@ -72,9 +108,7 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           id="name"
           value={newProduct.name}
           required
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, name: e.target.value })
-          }
+          onChange={handleSetName}
         />
         <br />
         <label htmlFor="description">description</label>
@@ -83,18 +117,14 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           id="description"
           value={newProduct.description}
           required
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, description: e.target.value })
-          }
+          onChange={handleSetDescription}
         />
         <label htmlFor="kidswear">kids wear</label>
         <input
           type="text"
           id="kidswear"
           value={newProduct.kidsWear}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, kidsWear: e.target.value })
-          }
+          onChange={handleSetKidsWear}
         />
         <br />
         <label htmlFor="womenwear">women wear</label>
@@ -102,9 +132,7 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           type="text"
           id="womenwear"
           value={newProduct.womenWear}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, womenWear: e.target.value })
-          }
+          onChange={handleSetWomenWear}
         />
         <br />
         <label htmlFor="menwear">men wear</label>
@@ -112,9 +140,7 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           type="text"
           id="menwear"
           value={newProduct.menWear}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, menWear: e.target.value })
-          }
+          onChange={handleSetMenWear}
         />
         <br />
         <label htmlFor="variants">Variants</label>
@@ -130,27 +156,21 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           type="number"
           id="small"
           value={newProduct.small}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, small: parseFloat(e.target.value) })
-          }
+          onChange={handleSetSmall}
         />
         <label htmlFor="medium">medium</label>
         <input
           type="number"
           id="medium"
           value={newProduct.medium}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, medium: parseFloat(e.target.value) })
-          }
+          onChange={handleSetMedium}
         />
         <label htmlFor="large">large</label>
         <input
           type="number"
           id="large"
           value={newProduct.large}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, large: parseFloat(e.target.value) })
-          }
+          onChange={handleSetLarge}
         />
         <br />
         <label htmlFor="image">image</label>
@@ -158,9 +178,7 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
           type="text"
           id="image"
           value={newProduct.image}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, image: e.target.value })
-          }
+          onChange={handleSetImage}
         />
         <br />
 

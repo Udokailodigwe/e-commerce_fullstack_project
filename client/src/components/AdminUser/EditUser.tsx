@@ -1,3 +1,4 @@
+import e from "express";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { createUserThunk, updateUserThunk } from "redux/services/user";
@@ -41,6 +42,22 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
     });
   };
 
+  const handelSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({ ...newUser, firstName: e.target.value });
+  };
+
+  const handelSetLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({ ...newUser, lastName: e.target.value });
+  };
+
+  const handelSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({ ...newUser, email: e.target.value });
+  };
+
+  const handelSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({ ...newUser, image: e.target.value });
+  };
+
   return (
     <div>
       <h1>{!currentId ? "Create" : "Update"} User</h1>
@@ -51,9 +68,7 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           id="firstname"
           required
           value={newUser.firstName}
-          onChange={(e) =>
-            setNewUser({ ...newUser, firstName: e.target.value })
-          }
+          onChange={handelSetFirstName}
         />
         <br />
         <label htmlFor="lastname">lastname</label>
@@ -62,7 +77,7 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           id="firstname"
           required
           value={newUser.lastName}
-          onChange={(e) => setNewUser({ ...newUser, lastName: e.target.value })}
+          onChange={handelSetLastName}
         />
         <br />
         <label htmlFor="email">email</label>
@@ -71,7 +86,7 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           id="email"
           required
           value={newUser.email}
-          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+          onChange={handelSetEmail}
         />
         <br />
         <label htmlFor="image">image</label>
@@ -79,7 +94,7 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           type="text"
           id="image"
           value={newUser.image}
-          onChange={(e) => setNewUser({ ...newUser, image: e.target.value })}
+          onChange={handelSetImage}
         />
         <br />
         <button>{!currentId ? "Create" : "Update"} user</button>
