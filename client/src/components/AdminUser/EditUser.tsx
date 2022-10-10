@@ -8,7 +8,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     image: "",
   });
   const dispatch = useAppDispatch();
@@ -38,7 +37,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
       image: "",
     });
   };
@@ -74,15 +72,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           required
           value={newUser.email}
           onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-        />
-        <br />
-        <label htmlFor="password">password</label>
-        <input
-          type="text"
-          id="password"
-          required
-          value={newUser.password}
-          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
         />
         <br />
         <label htmlFor="image">image</label>

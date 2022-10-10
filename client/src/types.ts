@@ -25,11 +25,10 @@ export type Update = {
 
 export type Users = {
   _id: string;
-  admin: boolean;
+  isAdmin: boolean;
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
   image: string;
   isBanned: boolean;
 };
@@ -42,7 +41,7 @@ export interface UsersState {
 
 export type PickedPropsEditUser = Pick<
   Users,
-  "firstName" | "lastName" | "email" | "password" | "image"
+  "firstName" | "lastName" | "email" | "image"
 >;
 
 export type UpdateUser = {
