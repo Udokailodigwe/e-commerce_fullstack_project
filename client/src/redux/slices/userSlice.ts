@@ -6,7 +6,7 @@ import {
   fetchUserThunk,
   updateUserThunk,
 } from "redux/services/user";
-import { UsersState } from "types";
+import { Users, UsersState } from "types";
 
 const initialState: UsersState = {
   users: [],
@@ -44,7 +44,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(fetchUserThunk.fulfilled, (state, action) => {
-      state.users = action.payload.response;
+      state.users = [action.payload.response];
       state.isLoading = false;
     });
 
@@ -73,8 +73,12 @@ export const userSlice = createSlice({
 
     builder.addCase(updateUserThunk.fulfilled, (state, action) => {
       console.log(action.payload.response);
-      const { response } = action.payload;
-      state.users = [...state.users, response];
+      state.users = state.users.map((user: Users) => {
+        if (user._id === action.payload.response._id) {
+          return action.payload.response;
+        }
+        return user;
+      });
       state.isLoading = false;
     });
 

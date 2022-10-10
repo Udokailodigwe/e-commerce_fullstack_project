@@ -3,9 +3,9 @@ import mongoose, { Document } from 'mongoose'
 export type ProductDocument = Document & {
   name: string
   description: string
-  kidswear: string
-  womenwear: string
-  menwear: string
+  kidsWear: string
+  womenWear: string
+  menWear: string
   variants: string[]
   small: number
   medium: number
@@ -20,13 +20,13 @@ const productSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  kidswear: {
+  kidsWear: {
     type: String,
   },
-  womenwear: {
+  womenWear: {
     type: String,
   },
-  menwear: {
+  menWear: {
     type: String,
   },
   variants: {

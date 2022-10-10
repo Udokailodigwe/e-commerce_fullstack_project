@@ -9,9 +9,9 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
-    kidswear: "",
-    womenwear: "",
-    menwear: "",
+    kidsWear: "",
+    womenWear: "",
+    menWear: "",
     variants: [""],
     small: 0,
     medium: 0,
@@ -46,9 +46,9 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
     setNewProduct({
       name: "",
       description: "",
-      kidswear: "",
-      womenwear: "",
-      menwear: "",
+      kidsWear: "",
+      womenWear: "",
+      menWear: "",
       variants: [""],
       small: 0,
       medium: 0,
@@ -91,9 +91,9 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
         <input
           type="text"
           id="kidswear"
-          value={newProduct.kidswear}
+          value={newProduct.kidsWear}
           onChange={(e) =>
-            setNewProduct({ ...newProduct, kidswear: e.target.value })
+            setNewProduct({ ...newProduct, kidsWear: e.target.value })
           }
         />
         <br />
@@ -101,9 +101,9 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
         <input
           type="text"
           id="womenwear"
-          value={newProduct.womenwear}
+          value={newProduct.womenWear}
           onChange={(e) =>
-            setNewProduct({ ...newProduct, womenwear: e.target.value })
+            setNewProduct({ ...newProduct, womenWear: e.target.value })
           }
         />
         <br />
@@ -111,9 +111,9 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
         <input
           type="text"
           id="menwear"
-          value={newProduct.menwear}
+          value={newProduct.menWear}
           onChange={(e) =>
-            setNewProduct({ ...newProduct, menwear: e.target.value })
+            setNewProduct({ ...newProduct, menWear: e.target.value })
           }
         />
         <br />

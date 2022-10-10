@@ -39,13 +39,6 @@ export const productSlice = createSlice({
       state.error = false;
     });
 
-    builder.addCase(fetchOneProductThunk.fulfilled, (state, action) => {
-      const { response } = action.payload;
-      state.products = response;
-      state.isLoading = false;
-      state.error = false;
-    });
-
     builder.addCase(createProductThunk.rejected, (state) => {
       state.isLoading = false;
       state.error = true;
@@ -72,7 +65,12 @@ export const productSlice = createSlice({
 
     builder.addCase(updateProductThunk.fulfilled, (state, action) => {
       console.log("update", action.payload.response);
-      state.products = [action.payload.response];
+      state.products = state.products.map((product: Product) => {
+        if (product._id === action.payload.response._id) {
+          return action.payload.response;
+        }
+        return product;
+      });
       state.isLoading = false;
     });
 

@@ -20,7 +20,7 @@ const fetchAllProduct = async () => {
 const fetchOneProduct = async (productId: string) => {
   try {
     const data = await axios.get(`${URL}/${productId}`);
-    const response: Product[] = data.data;
+    const response: Product = data.data;
     const { status } = data;
     return {
       response,

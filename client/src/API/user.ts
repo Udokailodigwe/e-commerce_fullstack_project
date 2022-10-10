@@ -17,7 +17,7 @@ const fetchUsers = async () => {
 const fetchUser = async (id: string) => {
   try {
     const data = await axios.get(`${URL}/${id}`);
-    const response: Users[] = data.data;
+    const response: Users = data.data;
     const { status } = data;
     return { response, status };
   } catch (error) {

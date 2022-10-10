@@ -2,9 +2,9 @@ export type Product = {
   _id?: string;
   name: string;
   description: string;
-  kidswear: string;
-  womenwear: string;
-  menwear: string;
+  kidsWear: string;
+  womenWear: string;
+  menWear: string;
   variants: string[];
   small: number;
   medium: number;
