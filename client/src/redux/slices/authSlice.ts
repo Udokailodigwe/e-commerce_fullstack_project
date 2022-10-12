@@ -19,7 +19,7 @@ export type AuthState = {
 
 const initialState: AuthState = {
   token: "",
-  authenticatedUser: [],
+  authenticatedUser: JSON.parse(localStorage.getItem("user") || ""),
   error: false,
   isLoading: false,
 };
@@ -34,7 +34,7 @@ export const authSlice = createSlice({
       state.error = true;
       state.isLoading = false;
     });
-    builder.addCase(getTokenThunk.pending, (state, action) => {
+    builder.addCase(getTokenThunk.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(getTokenThunk.fulfilled, (state, action) => {
