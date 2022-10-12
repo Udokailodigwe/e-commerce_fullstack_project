@@ -9,11 +9,9 @@ export default function (req: Request, res: Response, next: NextFunction) {
     const authorizationHeader = req.headers.authorization
 
     if (authorizationHeader) {
-      console.log('authorizationHeader:', authorizationHeader)
       const token = authorizationHeader.split(' ')[1]
 
       const decodedUser = jwt.verify(token, JWT_SECRET)
-      console.log('decodeduser:', decodedUser)
 
       req.user = decodedUser
       return next()

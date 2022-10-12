@@ -18,5 +18,5 @@ export const login = (req: Request, res: Response) => {
     JWT_SECRET,
     { expiresIn: '1h' }
   )
-  res.json({ messsage: 'done', token })
+  res.json({ messsage: 'Success', token, user })
 }

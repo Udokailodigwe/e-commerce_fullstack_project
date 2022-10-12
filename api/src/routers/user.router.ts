@@ -13,10 +13,10 @@ const router = express.Router()
 
 // Every path we define here will get /api/v1/users prefix
 
-router.get('/', checkAuth, findAll) //to be checked later(checkAuth?)
+router.get('/', checkAuth, findAll)
 router.post('/', createUser)
 router.put('/:userId', updateUser)
-router.get('/:userId', findById) //to be checked later(checkAuth?)
-router.delete('/:userId', deleteUser)
+router.get('/:userId', checkAuth, findById)
+router.delete('/:userId', checkAuth, deleteUser)
 
 export default router
