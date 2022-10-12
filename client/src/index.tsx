@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import reportWebVitals from "reportWebVitals";
 import App from "App";
 import { store } from "redux/store";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "index.css";
 
 const container = document.getElementById("root")!;
