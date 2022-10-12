@@ -11,6 +11,7 @@ export type ProductDocument = Document & {
   medium: number
   large: number
   image: string
+  // price: number
 }
 
 const productSchema = new mongoose.Schema({
@@ -45,6 +46,10 @@ const productSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+
+  // price: {
+  //   type: Number,
+  // },
 })
 
 export default mongoose.model<ProductDocument>('Product', productSchema)

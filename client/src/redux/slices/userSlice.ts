@@ -29,7 +29,6 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(fetchUsersThunk.fulfilled, (state, action) => {
-      console.log("fetch", action.payload.response);
       state.users = action.payload.response;
       state.isLoading = false;
     });
@@ -72,7 +71,6 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(updateUserThunk.fulfilled, (state, action) => {
-      console.log(action.payload.response);
       state.users = state.users.map((user: Users) => {
         if (user._id === action.payload.response._id) {
           return action.payload.response;
@@ -92,7 +90,6 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
-      console.log(action.payload.id);
       const users = state.users.filter(
         (user) => user._id !== action.payload.id
       );

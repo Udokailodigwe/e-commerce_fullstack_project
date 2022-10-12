@@ -1,5 +1,5 @@
 export type Product = {
-  _id?: string;
+  _id: string;
   name: string;
   description: string;
   kidsWear: string;
@@ -11,6 +11,22 @@ export type Product = {
   large: number;
   image: string;
 };
+
+export type PickedPropsCreateProduct = Pick<
+  Product,
+  | "name"
+  | "description"
+  | "kidsWear"
+  | "womenWear"
+  | "menWear"
+  | "variants"
+  | "small"
+  | "medium"
+  | "large"
+  | "image"
+>;
+
+export type NewProduct = Omit<Product, "_id">;
 
 export interface ProductState {
   products: Product[];

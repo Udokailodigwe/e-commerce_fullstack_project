@@ -6,7 +6,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../../API/product";
-import { Product, Update } from "types";
+import { NewProduct, Product, Update } from "types";
 
 const fetchAllProductThunk = createAsyncThunk(
   "products/fetchProducts",
@@ -34,7 +34,7 @@ const fetchOneProductThunk = createAsyncThunk(
 
 const createProductThunk = createAsyncThunk(
   "product/create",
-  async (product: Product) => {
+  async (product: NewProduct) => {
     const { response } = await createProduct(product);
     return {
       response,
@@ -45,7 +45,8 @@ const createProductThunk = createAsyncThunk(
 const updateProductThunk = createAsyncThunk(
   "product/update",
   async ({ productId, update }: Update) => {
-    const response = await updateProduct(productId, update);
+    const response: Product = await updateProduct(productId, update);
+    console.log("thunk:", response);
     return response;
   }
 );

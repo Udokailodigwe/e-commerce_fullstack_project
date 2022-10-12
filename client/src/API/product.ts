@@ -1,7 +1,12 @@
 import axios from "axios";
-import { Product, Update } from "types";
+import { NewProduct, Product } from "types";
 
 const URL = "http://localhost:4000/api/v1/products";
+
+const token = JSON.parse(localStorage.getItem("token") || "");
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+};
 
 const fetchAllProduct = async () => {
   try {
@@ -31,9 +36,9 @@ const fetchOneProduct = async (productId: string) => {
   }
 };
 
-const createProduct = async (product: Product) => {
+const createProduct = async (product: NewProduct) => {
   try {
-    const data = await axios.post(`${URL}/`, product);
+    const data = await axios.post(`${URL}/`, product, config);
     const response: Product = data.data;
     const { status } = data;
     return {
@@ -47,10 +52,8 @@ const createProduct = async (product: Product) => {
 
 const updateProduct = async (productId: string, update: Partial<Product>) => {
   try {
-    // const { productId, update } = data;
-    const data = await axios.put(`${URL}/${productId}`, update);
+    const data = await axios.put(`${URL}/${productId}`, update, config);
     const response = data.data;
-    // const { status } = data;
     return response;
   } catch (error) {
     throw error;
@@ -59,7 +62,7 @@ const updateProduct = async (productId: string, update: Partial<Product>) => {
 
 const deleteProduct = async (productId: string | undefined) => {
   try {
-    const data = await axios.delete(`${URL}/${productId}`);
+    const data = await axios.delete(`${URL}/${productId}`, config);
     const { status } = data;
     return { productId, status };
   } catch (error) {

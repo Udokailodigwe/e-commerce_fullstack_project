@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { createProductThunk, updateProductThunk } from "redux/services/product";
-import { CurrentId } from "types";
+import { CurrentId, NewProduct } from "types";
 
 export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
   console.log(currentId);
-  const [newProduct, setNewProduct] = useState({
+  const [newProduct, setNewProduct] = useState<NewProduct>({
     name: "",
     description: "",
     kidsWear: "",
@@ -32,6 +32,7 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (currentId) {
+      console.log(product);
       dispatch(
         updateProductThunk({ productId: currentId, update: newProduct })
       );

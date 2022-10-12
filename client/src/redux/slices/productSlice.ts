@@ -2,13 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   fetchAllProductThunk,
-  fetchOneProductThunk,
   createProductThunk,
   updateProductThunk,
   deleteProductThunk,
 } from "redux/services/product";
 
-import { Product, ProductState, Update } from "types";
+import { Product, ProductState } from "types";
 
 const initialState: ProductState = {
   products: [],
@@ -64,10 +63,9 @@ export const productSlice = createSlice({
     });
 
     builder.addCase(updateProductThunk.fulfilled, (state, action) => {
-      console.log("update", action.payload.response);
       state.products = state.products.map((product: Product) => {
-        if (product._id === action.payload.response._id) {
-          return action.payload.response;
+        if (product._id === action.payload._id) {
+          return action.payload;
         }
         return product;
       });

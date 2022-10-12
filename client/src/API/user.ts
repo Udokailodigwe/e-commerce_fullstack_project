@@ -3,9 +3,14 @@ import { PickedPropsEditUser, Users } from "types";
 
 const URL = "http://localhost:4000/api/v1/users";
 
+const token = JSON.parse(localStorage.getItem("token") || "");
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+};
+
 const fetchUsers = async () => {
   try {
-    const data = await axios.get(`${URL}`);
+    const data = await axios.get(`${URL}`, config);
     const response: Users[] = data.data;
     const { status } = data;
     return { response, status };
@@ -16,7 +21,7 @@ const fetchUsers = async () => {
 
 const fetchUser = async (id: string) => {
   try {
-    const data = await axios.get(`${URL}/${id}`);
+    const data = await axios.get(`${URL}/${id}`, config);
     const response: Users = data.data;
     const { status } = data;
     return { response, status };
@@ -38,7 +43,7 @@ const createUser = async (user: PickedPropsEditUser) => {
 
 const deleteUser = async (id: string) => {
   try {
-    const response = await axios.delete(`${URL}/${id}`);
+    const response = await axios.delete(`${URL}/${id}`, config);
     const { status } = response.data;
     return {
       status,
