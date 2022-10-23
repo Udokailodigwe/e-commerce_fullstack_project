@@ -43,20 +43,8 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
     });
   };
 
-  const handelSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, firstName: e.target.value });
-  };
-
-  const handelSetLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, lastName: e.target.value });
-  };
-
-  const handelSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, email: e.target.value });
-  };
-
-  const handelSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, image: e.target.value });
+  const handelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
   return (
@@ -67,32 +55,36 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
         <input
           type="text"
           id="firstname"
+          name="firstName"
           required
           value={newUser.firstName}
-          onChange={handelSetFirstName}
+          onChange={handelChange}
         />
         <label htmlFor="lastname">lastname</label>
         <input
           type="text"
-          id="firstname"
+          id="lastname"
+          name="firstName"
           required
           value={newUser.lastName}
-          onChange={handelSetLastName}
+          onChange={handelChange}
         />
         <label htmlFor="email">email</label>
         <input
           type="text"
           id="email"
+          name="email"
           required
           value={newUser.email}
-          onChange={handelSetEmail}
+          onChange={handelChange}
         />
         <label htmlFor="image">image</label>
         <input
           type="text"
           id="image"
+          name="image"
           value={newUser.image}
-          onChange={handelSetImage}
+          onChange={handelChange}
         />
         <button className="user_btn">
           {!currentId ? "Create" : "Update"} user

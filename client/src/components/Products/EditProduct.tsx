@@ -61,48 +61,15 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
     });
   };
 
-  const handleSetName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, name: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
-  const handleSetDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, description: e.target.value });
-  };
-
-  const handleSetCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, category: e.target.value });
-  };
-
-  const handleSetSmall = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, small: parseFloat(e.target.value) });
-  };
-
-  const handleSetMedium = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, medium: parseFloat(e.target.value) });
-  };
-
-  const handleSetLarge = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, large: parseFloat(e.target.value) });
-  };
-
-  const handleSetImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, image: e.target.value });
-  };
-
-  const handleSetPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, price: parseFloat(e.target.value) });
-  };
-
-  const handleSetRating = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, rating: parseFloat(e.target.value) });
-  };
-
-  const handleSetCountInStock = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, countInStock: parseFloat(e.target.value) });
-  };
-
-  const handleSetReviews = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewProduct({ ...newProduct, reviews: parseFloat(e.target.value) });
+  const handleNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewProduct({
+      ...newProduct,
+      [e.target.name]: parseFloat(e.target.value),
+    });
   };
 
   return (
@@ -113,83 +80,94 @@ export default function EditProduct({ currentId, setCurrentId }: CurrentId) {
         <input
           type="text"
           id="name"
+          name="name"
           value={newProduct.name}
           required
-          onChange={handleSetName}
+          onChange={handleChange}
         />
         <label htmlFor="description">description</label>
         <input
           type="text"
           id="description"
+          name="description"
           value={newProduct.description}
           required
-          onChange={handleSetDescription}
+          onChange={handleChange}
         />
         <label htmlFor="category">category</label>
         <input
           type="text"
           id="category"
+          name="category"
           value={newProduct.category}
-          onChange={handleSetCategory}
+          onChange={handleChange}
         />
         <label htmlFor="small">small</label>
         <input
           type="number"
           id="small"
+          name="small"
           value={newProduct.small}
-          onChange={handleSetSmall}
+          onChange={handleNumChange}
         />
         <label htmlFor="medium">medium</label>
         <input
           type="number"
           id="medium"
+          name="medium"
           value={newProduct.medium}
-          onChange={handleSetMedium}
+          onChange={handleNumChange}
         />
         <label htmlFor="large">large</label>
         <input
           type="number"
           id="large"
+          name="large"
           value={newProduct.large}
-          onChange={handleSetLarge}
+          onChange={handleNumChange}
         />
 
         <label htmlFor="image">image</label>
         <input
           type="text"
           id="image"
+          name="image"
           value={newProduct.image}
-          onChange={handleSetImage}
+          onChange={handleChange}
         />
 
         <label htmlFor="price">price</label>
         <input
           type="number"
           id="price"
+          name="price"
           value={newProduct.price}
-          onChange={handleSetPrice}
+          onChange={handleNumChange}
         />
 
         <label htmlFor="rating">rating</label>
         <input
           type="number"
           id="rating"
+          name="rating"
           value={newProduct.rating}
-          onChange={handleSetRating}
+          onChange={handleNumChange}
         />
         <label htmlFor="countinstock">countInStock</label>
         <input
           type="number"
           id="countinstock"
+          name="countinstock"
           value={newProduct.countInStock}
-          onChange={handleSetCountInStock}
+          onChange={handleNumChange}
         />
         <label htmlFor="reviews">reviews</label>
         <input
           type="number"
           id="reviews"
+          name="reviews"
           value={newProduct.reviews}
-          onChange={handleSetReviews}
+          onChange={handleNumChange}
         />
         <button className="product_btn">
           {!currentId ? "Create" : "Update"} product

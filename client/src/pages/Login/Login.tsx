@@ -17,7 +17,7 @@ export default function Login() {
     if (response.credential) {
       await dispatch(getTokenThunk(response));
     }
-    navigate("/Shop");
+    navigate("/shop");
   };
 
   const toggleModal = () => {
