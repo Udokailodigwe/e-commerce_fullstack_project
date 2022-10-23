@@ -1,0 +1,12 @@
+.dashboard {
+  text-align: center;
+  padding: 30px;
+}
+
+.dashboard_link {
+  display: block;
+  color: black;
+}
+.dashboard_link:hover {
+  color: #2e8b57;
+}

@@ -4,15 +4,16 @@ import { RootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { fetchAllProductThunk } from "redux/services/product";
 import { Link } from "react-router-dom";
-import Nav from "components/Nav";
 
-const Home = () => {
+import "./Shop.css";
+import Footer from "components/Footer/Footer";
+import Rating from "components/Rating/Rating";
+
+const Shop = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(
     (state: RootState) => state.products.products
   );
-
-  console.log(products);
 
   useEffect(() => {
     dispatch(fetchAllProductThunk());
@@ -20,30 +21,37 @@ const Home = () => {
 
   return (
     <div>
-      <Nav />
+      <section className="hero">
+        <h2>New Arrivals</h2>
+      </section>
+
       <main>
-        <h1>Products Lists</h1>
+        <h2 className="feature">Features</h2>
         <div className="products">
           {products.map((product) => (
             <div className="product" key={product._id}>
-              <Link className="link" to={`/products/${product._id}`}>
+              <Link to={`/products/${product._id}`}>
                 <img src={product.image} alt={product.name} />
               </Link>
               <div className="product_detail">
-                <Link className="link" to={`/products/${product.name}`}>
+                <Link className="product_name" to={`/products/${product._id}`}>
                   {product.name}
                 </Link>
+                <Rating rating={product.rating} reviews={product.reviews} />
                 <p>
-                  <strong>$19.99</strong>
+                  <strong>${product.price}</strong>
                 </p>
-                <button>Select</button>
+                <Link to="/cart" className="cart_link">
+                  Add to Cart
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default Shop;

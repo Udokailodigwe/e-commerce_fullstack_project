@@ -3,7 +3,7 @@ import { PickedPropsEditUser, Users } from "types";
 
 const URL = "http://localhost:4000/api/v1/users";
 
-const token = JSON.parse(localStorage.getItem("token") || "");
+const token = localStorage.getItem("token") || "";
 const config = {
   headers: { Authorization: `Bearer ${token}` },
 };
@@ -32,7 +32,7 @@ const fetchUser = async (id: string) => {
 
 const createUser = async (user: PickedPropsEditUser) => {
   try {
-    const data = await axios.post(`${URL}/`, user);
+    const data = await axios.post(`${URL}/`, user, config);
     const response: Users = data.data;
     const { status } = data;
     return { response, status };

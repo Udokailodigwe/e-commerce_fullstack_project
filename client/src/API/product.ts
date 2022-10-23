@@ -3,14 +3,14 @@ import { NewProduct, Product } from "types";
 
 const URL = "http://localhost:4000/api/v1/products";
 
-const token = JSON.parse(localStorage.getItem("token") || "");
+const token = localStorage.getItem("token") || "";
 const config = {
   headers: { Authorization: `Bearer ${token}` },
 };
-
+console.log(config);
 const fetchAllProduct = async () => {
   try {
-    const data = await axios.get(`${URL}`);
+    const data = await axios.get(`${URL}`, config);
     const response: Product[] = data.data;
     const { status } = data;
     return {
@@ -24,7 +24,7 @@ const fetchAllProduct = async () => {
 
 const fetchOneProduct = async (productId: string) => {
   try {
-    const data = await axios.get(`${URL}/${productId}`);
+    const data = await axios.get(`${URL}/${productId}`, config);
     const response: Product = data.data;
     const { status } = data;
     return {

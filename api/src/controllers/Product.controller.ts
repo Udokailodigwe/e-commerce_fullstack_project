@@ -31,27 +31,29 @@ export const createProduct = async (
     const {
       name,
       description,
-      kidswear,
-      womenwear,
-      menwear,
-      variants,
+      category,
       small,
       medium,
       large,
       image,
+      price,
+      rating,
+      countInStock,
+      reviews,
     } = req.body
 
     const product = new Product({
       name,
       description,
-      kidswear,
-      womenwear,
-      menwear,
-      variants,
+      category,
       small,
       medium,
       large,
       image,
+      price,
+      rating,
+      countInStock,
+      reviews,
     })
 
     await productService.create(product)

@@ -1,0 +1,46 @@
+#header {
+  color: #fff;
+  background-color: #20b2aa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  padding: 20px 50px;
+  box-shadow: 0 5px 15px rgb(0, 0, 0, 0.6);
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+#navbar {
+  position: relative;
+}
+
+#navbar .link {
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.4s ease;
+}
+
+#navbar .link:hover,
+.link.active {
+  color: black;
+  text-decoration: underline;
+}
+
+.logout {
+  border-color: #20b2aa;
+  border-radius: 10px;
+  padding: 2px 5px;
+  font-size: 14px;
+  margin: 5px;
+  transition: 0.2s ease;
+}
+
+.logout:hover {
+  color: #20b2aa;
+}

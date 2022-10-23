@@ -31,8 +31,8 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(fetchAllProductThunk.fulfilled, (state, action) => {
-      const { response } = action.payload;
+    builder.addCase(fetchAllProductThunk.fulfilled, (state, { payload }) => {
+      const { response } = payload;
       state.products = response;
       state.isLoading = false;
       state.error = false;
@@ -47,8 +47,8 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(createProductThunk.fulfilled, (state, action) => {
-      const { response } = action.payload;
+    builder.addCase(createProductThunk.fulfilled, (state, { payload }) => {
+      const { response } = payload;
       state.products = [...state.products, response];
       state.isLoading = false;
     });
@@ -62,10 +62,10 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(updateProductThunk.fulfilled, (state, action) => {
+    builder.addCase(updateProductThunk.fulfilled, (state, { payload }) => {
       state.products = state.products.map((product: Product) => {
-        if (product._id === action.payload._id) {
-          return action.payload;
+        if (product._id === payload._id) {
+          return payload;
         }
         return product;
       });
@@ -81,8 +81,8 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(deleteProductThunk.fulfilled, (state, action) => {
-      const { productId } = action.payload;
+    builder.addCase(deleteProductThunk.fulfilled, (state, { payload }) => {
+      const { productId } = payload;
       const products = state.products.filter(
         (product) => product._id !== productId
       );

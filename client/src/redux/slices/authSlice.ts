@@ -3,23 +3,18 @@ import getTokenThunk from "redux/services/auth";
 
 //to be move to types file later
 export type AuthState = {
-  token: string;
-  authenticatedUser: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    image: string;
-    isAdmin: Boolean;
-    isBanned: Boolean;
-  }[];
+  token: any;
+  authenticatedUser: null;
   error: Boolean;
   isLoading: Boolean;
 };
 
+const token = localStorage.getItem("token") || null;
+const user = localStorage.getItem("user") || JSON.parse("{}");
+
 const initialState: AuthState = {
-  token: "",
-  authenticatedUser: JSON.parse(localStorage.getItem("user") || ""),
+  token: token,
+  authenticatedUser: user,
   error: false,
   isLoading: false,
 };
@@ -27,7 +22,15 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      localStorage.clear();
+      state.isLoading = false;
+      state.token = null;
+      state.authenticatedUser = null;
+      state.error = false;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(getTokenThunk.rejected, (state) => {
@@ -37,14 +40,16 @@ export const authSlice = createSlice({
     builder.addCase(getTokenThunk.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getTokenThunk.fulfilled, (state, action) => {
-      const token = action.payload.token;
-      const authenticatedUser = action.payload.user;
+    builder.addCase(getTokenThunk.fulfilled, (state, { payload }) => {
+      const token = payload.token;
       state.token = token;
+      const authenticatedUser = payload.user;
       state.authenticatedUser = authenticatedUser;
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("user", JSON.stringify(authenticatedUser));
     });
   },
 });
+
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

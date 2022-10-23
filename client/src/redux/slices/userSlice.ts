@@ -28,8 +28,8 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(fetchUsersThunk.fulfilled, (state, action) => {
-      state.users = action.payload.response;
+    builder.addCase(fetchUsersThunk.fulfilled, (state, { payload }) => {
+      state.users = payload.response;
       state.isLoading = false;
     });
 
@@ -42,8 +42,8 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(fetchUserThunk.fulfilled, (state, action) => {
-      state.users = [action.payload.response];
+    builder.addCase(fetchUserThunk.fulfilled, (state, { payload }) => {
+      state.users = [payload.response];
       state.isLoading = false;
     });
 
@@ -56,24 +56,24 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(createUserThunk.fulfilled, (state, action) => {
-      const { response } = action.payload;
+    builder.addCase(createUserThunk.fulfilled, (state, { payload }) => {
+      const { response } = payload;
       state.users = [...state.users, response];
     });
 
-    builder.addCase(updateUserThunk.rejected, (state, action) => {
+    builder.addCase(updateUserThunk.rejected, (state) => {
       state.error = true;
       state.isLoading = false;
     });
 
-    builder.addCase(updateUserThunk.pending, (state, action) => {
+    builder.addCase(updateUserThunk.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(updateUserThunk.fulfilled, (state, action) => {
+    builder.addCase(updateUserThunk.fulfilled, (state, { payload }) => {
       state.users = state.users.map((user: Users) => {
-        if (user._id === action.payload.response._id) {
-          return action.payload.response;
+        if (user._id === payload.response._id) {
+          return payload.response;
         }
         return user;
       });
@@ -89,10 +89,8 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
-      const users = state.users.filter(
-        (user) => user._id !== action.payload.id
-      );
+    builder.addCase(deleteUserThunk.fulfilled, (state, { payload }) => {
+      const users = state.users.filter((user) => user._id !== payload.id);
       state.users = users;
       state.isLoading = false;
     });

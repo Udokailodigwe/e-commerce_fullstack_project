@@ -2,28 +2,29 @@ export type Product = {
   _id: string;
   name: string;
   description: string;
-  kidsWear: string;
-  womenWear: string;
-  menWear: string;
-  variants: string[];
+  category: string;
   small: number;
   medium: number;
   large: number;
   image: string;
+  price: number;
+  rating: number;
+  countInStock: number;
+  reviews: number;
 };
 
 export type PickedPropsCreateProduct = Pick<
   Product,
   | "name"
   | "description"
-  | "kidsWear"
-  | "womenWear"
-  | "menWear"
-  | "variants"
+  | "category"
   | "small"
   | "medium"
   | "large"
-  | "image"
+  | "price"
+  | "rating"
+  | "countInStock"
+  | "reviews"
 >;
 
 export type NewProduct = Omit<Product, "_id">;

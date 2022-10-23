@@ -1,0 +1,45 @@
+.login {
+  background-image: url(../../Assets/banner1.jpg);
+  background-repeat: round;
+  height: 83.7vh;
+}
+
+.btn-modal {
+  border-color: #20b2aa;
+  border-radius: 10px;
+  padding: 2px 15px;
+  font-size: 18px;
+  margin: 10px 80px;
+  float: right;
+  transition: 0.2s ease;
+}
+
+.btn-modal:hover {
+  color: #fff;
+  background-color: #20b2aa;
+}
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+}
+.modal-content {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 300px;
+  min-width: 300px;
+}

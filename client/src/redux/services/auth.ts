@@ -4,9 +4,9 @@ import getToken from "API/auth";
 
 const getTokenThunk = createAsyncThunk(
   "auth/getToken",
-  async (response: CredentialResponse) => {
+  async (credential: CredentialResponse) => {
     try {
-      const { res } = await getToken(response);
+      const { res } = await getToken(credential);
       console.log(res);
       return res;
     } catch (error) {

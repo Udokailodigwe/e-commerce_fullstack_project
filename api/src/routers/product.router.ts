@@ -13,9 +13,9 @@ const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
 router.get('/', findAll)
-router.post('/', checkAuth, createProduct)
-router.put('/:productId', checkAuth, updateProduct)
+router.post('/', createProduct)
+router.put('/:productId', updateProduct)
 router.get('/:productId', findById)
-router.delete('/:productId', checkAuth, deleteProduct)
+router.delete('/:productId', deleteProduct)
 
 export default router

@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { createUserThunk, updateUserThunk } from "redux/services/user";
 import { CurrentId, PickedPropsEditUser } from "types";
 
+import "./users.css";
+
 export default function EditUser({ currentId, setCurrentId }: CurrentId) {
   const [newUser, setNewUser] = useState<PickedPropsEditUser>({
     firstName: "",
@@ -58,9 +60,9 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
   };
 
   return (
-    <div>
-      <h1>{!currentId ? "Create" : "Update"} User</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="form_input">
+      <h3 className="title">{!currentId ? "Create" : "Update"} user</h3>
+      <form className="form_input" onSubmit={handleSubmit}>
         <label htmlFor="firstname">firstname</label>
         <input
           type="text"
@@ -69,7 +71,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           value={newUser.firstName}
           onChange={handelSetFirstName}
         />
-        <br />
         <label htmlFor="lastname">lastname</label>
         <input
           type="text"
@@ -78,7 +79,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           value={newUser.lastName}
           onChange={handelSetLastName}
         />
-        <br />
         <label htmlFor="email">email</label>
         <input
           type="text"
@@ -87,7 +87,6 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           value={newUser.email}
           onChange={handelSetEmail}
         />
-        <br />
         <label htmlFor="image">image</label>
         <input
           type="text"
@@ -95,11 +94,13 @@ export default function EditUser({ currentId, setCurrentId }: CurrentId) {
           value={newUser.image}
           onChange={handelSetImage}
         />
-        <br />
-        <button>{!currentId ? "Create" : "Update"} user</button>
-        <button onClick={clear}>Reset</button>
+        <button className="user_btn">
+          {!currentId ? "Create" : "Update"} user
+        </button>
+        <button className="user_btn" onClick={clear}>
+          Reset
+        </button>
       </form>
-      <br />
     </div>
   );
 }
