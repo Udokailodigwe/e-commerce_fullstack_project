@@ -3,11 +3,13 @@ import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/slices/authSlice";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
+import { Users } from "types";
+
 import "./Nav.css";
 
 type NavProps = {
-  token: null;
-  authenticatedUser: any;
+  token: string;
+  authenticatedUser: Users;
 };
 
 export default function Nav({ token, authenticatedUser }: NavProps) {

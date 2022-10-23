@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getTokenThunk from "redux/services/auth";
 
+import { Users } from "types";
+
 //to be move to types file later
 export type AuthState = {
-  token: any;
-  authenticatedUser: null;
+  token: string;
+  authenticatedUser: Users;
   error: Boolean;
   isLoading: Boolean;
 };
 
-const token = localStorage.getItem("token") || null;
-const user = localStorage.getItem("user") || JSON.parse("{}");
+const token = localStorage.getItem("token") || "";
+const user: Users = localStorage.getItem("user") || JSON.parse("{}");
 
 const initialState: AuthState = {
   token: token,
@@ -26,8 +28,8 @@ export const authSlice = createSlice({
     logout: (state) => {
       localStorage.clear();
       state.isLoading = false;
-      state.token = null;
-      state.authenticatedUser = null;
+      state.token = "";
+      state.authenticatedUser = JSON.parse("{}");
       state.error = false;
     },
   },

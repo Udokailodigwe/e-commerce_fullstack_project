@@ -7,7 +7,6 @@ const getTokenThunk = createAsyncThunk(
   async (credential: CredentialResponse) => {
     try {
       const { res } = await getToken(credential);
-      console.log(res);
       return res;
     } catch (error) {
       throw error;

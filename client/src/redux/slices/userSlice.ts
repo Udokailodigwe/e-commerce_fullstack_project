@@ -43,7 +43,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(fetchUserThunk.fulfilled, (state, { payload }) => {
-      state.users = [payload.response];
+      state.users = [...state.users, payload.response];
       state.isLoading = false;
     });
 

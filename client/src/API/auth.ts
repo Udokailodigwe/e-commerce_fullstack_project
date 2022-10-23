@@ -1,6 +1,8 @@
 import { CredentialResponse } from "@react-oauth/google";
 import axios from "axios";
 
+import { Users } from "types";
+
 const URL = "http://localhost:4000/api/v1/login";
 
 const getToken = async (response: CredentialResponse) => {
@@ -14,8 +16,7 @@ const getToken = async (response: CredentialResponse) => {
         },
       }
     );
-    const res = data.data;
-    console.log(res);
+    const res: { token: string; user: Users } = data.data;
     return { res };
   } catch (error) {
     throw error;
