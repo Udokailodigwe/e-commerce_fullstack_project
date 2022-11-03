@@ -12,7 +12,7 @@ export type AuthState = {
 };
 
 const token = localStorage.getItem("token") || "";
-const user: Users = localStorage.getItem("user") || JSON.parse("{}");
+const user: Users = JSON.parse(localStorage.getItem("user") || "{}");
 
 const initialState: AuthState = {
   token: token,

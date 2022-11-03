@@ -1,5 +1,6 @@
 import express from 'express'
 import checkAuth from '../middlewares/checkAuth'
+import checkAdmin from '../middlewares/checkAdmin'
 
 import {
   findAll,
