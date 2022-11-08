@@ -14,9 +14,6 @@ export default function () {
       done: VerifiedCallback
     ) => {
       try {
-        console.log('googleId', googleId)
-        console.log('parsedToken', parsedToken)
-
         let user: any = await User.findOne({ email: parsedToken.payload.email })
         if (!user) {
           user = new User({

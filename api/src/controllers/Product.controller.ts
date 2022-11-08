@@ -124,3 +124,36 @@ export const deleteProduct = async (
     }
   }
 }
+
+export const searchBy = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // OUR GOAL TO GET HERE -> const query = [{ name: 'Nike' }, { price: 61.99 }]
+    // FROM req.query = { name: 'Nike', price: '61.99' }
+    // TO [{ name: 'Nike' }, { price: 61.99 }]
+    const resQuery = req.query
+
+    const queries = []
+    const allowedQueries = ['name']
+
+    for (const key in resQuery) {
+      const value = resQuery[key]
+      const isAllowedKey = allowedQueries.includes(key)
+      if (isAllowedKey) {
+        queries.push({ [key]: value })
+      }
+    }
+    console.log(queries)
+    const products = await productService.searchBy(queries)
+    res.status(200).json(products)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'validationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}

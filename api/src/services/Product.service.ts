@@ -5,6 +5,13 @@ const findAll = async (): Promise<ProductDocument[]> => {
   return Product.find().sort({ name: 1, category: 1 })
 }
 
+const searchBy = async (query: object[]): Promise<ProductDocument[]> => {
+  // my goal to send this type of data [{ name: 'Nike' }, { price: 61.99 }]
+  return await Product.find({
+    $and: query,
+  })
+}
+
 const create = async (product: ProductDocument): Promise<ProductDocument> => {
   const savedProduct = product.save()
   return savedProduct
@@ -52,4 +59,5 @@ export default {
   update,
   findById,
   deleteProduct,
+  searchBy,
 }

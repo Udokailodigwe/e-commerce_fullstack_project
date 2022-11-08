@@ -1,6 +1,5 @@
 import express from 'express'
 import checkAuth from '../middlewares/checkAuth'
-import checkAdmin from '../middlewares/checkAdmin'
 
 import {
   findAll,
@@ -8,15 +7,18 @@ import {
   updateProduct,
   findById,
   deleteProduct,
+  searchBy,
 } from '../controllers/Product.controller'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
-router.get('/', checkAuth, checkAdmin, findAll)
-router.post('/', createProduct)
-router.put('/:productId', updateProduct)
-router.get('/:productId', findById)
-router.delete('/:productId', deleteProduct)
+// router.get('/', checkAuth, findAll)
+router.get('/', checkAuth, findAll)
+router.post('/', checkAuth, createProduct)
+router.get('/search', checkAuth, searchBy)
+router.put('/:productId', checkAuth, updateProduct)
+router.get('/:productId', checkAuth, findById)
+router.delete('/:productId', checkAuth, deleteProduct)
 
 export default router

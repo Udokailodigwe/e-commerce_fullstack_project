@@ -8,13 +8,8 @@ export const login = (req: Request, res: Response) => {
   const token = jwt.sign(
     {
       userId: user._id,
-      product: user.product,
-      firstName: user.firstName,
-      lastName: user.lastName,
       email: user.email,
-      image: user.image,
       isAdmin: user.isAdmin,
-      isBanned: user.isBanned,
     },
     JWT_SECRET,
     { expiresIn: '24h' }

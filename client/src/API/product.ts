@@ -7,7 +7,24 @@ const token = localStorage.getItem("token") || "";
 const config = {
   headers: { Authorization: `Bearer ${token}` },
 };
-console.log(config);
+
+const searchBy = async (query: any) => {
+  try {
+    const data = await axios.get(
+      `http://localhost:4000/api/v1/products/search?${query}`,
+      config
+    );
+    const response = data.data;
+    const { status } = data;
+    return {
+      response,
+      status,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
 const fetchAllProduct = async () => {
   try {
     const data = await axios.get(`${URL}`, config);
@@ -70,6 +87,7 @@ const deleteProduct = async (productId: string | undefined) => {
   }
 };
 export {
+  searchBy,
   fetchAllProduct,
   fetchOneProduct,
   createProduct,

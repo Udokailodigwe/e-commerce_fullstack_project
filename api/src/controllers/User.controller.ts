@@ -106,3 +106,39 @@ export const deleteUser = async (
     }
   }
 }
+
+export const banUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.params.userId
+    const user = await userService.banUser(userId)
+    res.status(201).json(user)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'validationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export const unBanUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = req.params.userId
+    const user = await userService.unBanUser(userId)
+    res.status(201).json(user)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'validationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}

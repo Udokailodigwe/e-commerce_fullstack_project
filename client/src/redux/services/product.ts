@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  searchBy,
   createProduct,
   fetchAllProduct,
   fetchOneProduct,
@@ -7,6 +8,20 @@ import {
   deleteProduct,
 } from "../../API/product";
 import { NewProduct, Product, Update } from "types";
+
+const searchByThunk = createAsyncThunk(
+  "products/searchBy",
+  async (query: any) => {
+    try {
+      const { response } = await searchBy(query);
+      return {
+        response,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 const fetchAllProductThunk = createAsyncThunk(
   "products/fetchProducts",
@@ -60,6 +75,7 @@ const deleteProductThunk = createAsyncThunk(
 );
 
 export {
+  searchByThunk,
   fetchAllProductThunk,
   fetchOneProductThunk,
   createProductThunk,

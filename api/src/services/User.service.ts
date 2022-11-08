@@ -31,6 +31,25 @@ const findById = async (userId: string): Promise<UserDocument> => {
   return foundUser
 }
 
+const banUser = async (userId: string): Promise<UserDocument> => {
+  const foundUser = await User.findByIdAndUpdate(userId, {
+    isBanned: true,
+  })
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
+  return foundUser
+}
+const unBanUser = async (userId: string): Promise<UserDocument> => {
+  const foundUser = await User.findByIdAndUpdate(userId, {
+    isBanned: false,
+  })
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
+  return foundUser
+}
+
 const deleteUser = async (userId: string): Promise<UserDocument> => {
   const foundUser = await User.findByIdAndDelete(userId)
   if (!foundUser) {
@@ -39,4 +58,12 @@ const deleteUser = async (userId: string): Promise<UserDocument> => {
   return foundUser
 }
 
-export default { findAll, create, update, findById, deleteUser }
+export default {
+  findAll,
+  create,
+  update,
+  findById,
+  deleteUser,
+  banUser,
+  unBanUser,
+}

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
+  searchByThunk,
   fetchAllProductThunk,
   createProductThunk,
   updateProductThunk,
@@ -22,6 +23,23 @@ export const productSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+    builder.addCase(searchByThunk.rejected, (state) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    builder.addCase(searchByThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(searchByThunk.fulfilled, (state, { payload }) => {
+      console.log(payload);
+
+      state.products = payload.response;
+      state.isLoading = false;
+      state.error = false;
+    });
+
     builder.addCase(fetchAllProductThunk.rejected, (state) => {
       state.isLoading = false;
       state.error = false;

@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import Shop from "../pages/Shop/Shop";
-import Contact from "../pages/Contact";
 import Profile from "../pages/Profile";
 import Product from "../pages/Product/Product";
 import AdminProducts from "components/Products/ManageProducts";
@@ -20,7 +19,6 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route index element={<Shop />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/contact/" element={<Contact />} />
           <Route path="/profile/" element={<Profile />} />
           <Route path="/cart/" element={<Cart />} />
           <Route path="/products/:id" element={<Product />} />
